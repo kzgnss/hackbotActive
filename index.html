@@ -38,7 +38,7 @@
 </head>
 <body class="bg-gray-900 text-white font-sans">
   <div id="loading" class="loading-screen">
-    <p>Loading... Please wait while we connect your account.</p>
+    <p>Loading... Please wait while we set up your experience.</p>
   </div>
 
   <div id="mainContent" class="hidden-screen">
@@ -52,24 +52,27 @@
     </header>
 
     <section class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
-      <h2 class="text-3xl md:text-5xl font-bold mb-6">Connect Your Account and Start Earning</h2>
-      <p class="max-w-xl mb-8 text-gray-300">Now that you're registered, connect your account ID to start receiving our AI-powered game signals. Accuracy: 100%.</p>
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">Earn Real Money with AI Game Predictions</h2>
+      <p class="max-w-xl mb-8 text-gray-300">Join thousands of Filipinos using our smart AI to win in games like Aviator, Mines, and Penalty. 98% signal accuracy, real-time predictions, and fast cashouts!</p>
+      
+      <!-- ID input for connection -->
+      <input id="userId" type="text" placeholder="Enter your 1xBet Account ID" class="bg-gray-700 text-white p-3 rounded-md mb-4" />
+      <button id="connectButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-xl text-lg transition">Connect Account</button>
 
-      <!-- Account ID input form -->
-      <div id="accountForm" class="flex flex-col items-center mb-6">
-        <input type="text" id="accountId" class="bg-gray-800 text-white border-2 border-gray-600 p-3 rounded-lg mb-4" placeholder="Enter your 1xBet Account ID" />
-        <button id="connectButton" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition">Connect Account</button>
+      <!-- Success message -->
+      <div id="connectionSuccess" class="hidden text-green-400 font-bold mt-6">
+        <p>Account ID: <span id="accountIdDisplay">1234567890</span> is successfully connected!</p>
+        <p>Status: Active | 100% Prediction Accuracy | AI Algorithms Analyzed</p>
+        <button id="getSignalButton" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition mt-4">Get Signal</button>
       </div>
 
-      <div id="signalButton" class="hidden mt-6">
-        <button id="getSignalButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition">Start Receiving Signals</button>
-      </div>
-
+      <!-- Error message for deposit -->
       <div id="errorBox" class="hidden bg-red-600 p-6 rounded-xl max-w-md mx-auto mt-6">
         <h2 class="text-xl font-bold mb-2">⚠️ Deposit Not Found</h2>
         <p class="mb-4">It looks like you haven't made a deposit yet. Please deposit funds to unlock the signal access.</p>
-        <p class="text-lg mb-4 text-yellow-400">Use special promo code: <strong>M5CS</strong></p>
-        <a href="https://affpa.top/L?tag=d_3316638m_14189c_&site=3316638&ad=14189&r=registration" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition">Deposit Now on 1xBet</a>
+        <a href="https://affpa.top/L?tag=d_3316638m_14189c_&site=3316638&ad=14189&r=registration" target="_blank" id="depositButton" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition">
+          Deposit Now on 1xBet
+        </a>
       </div>
     </section>
 
@@ -135,22 +138,17 @@
       document.getElementById("mainContent").classList.remove("hidden-screen");
     }, 3000); // 3 seconds delay for loading
 
-    // Simulate account connection after entering the ID
+    // Connect account functionality
     document.getElementById("connectButton").addEventListener("click", () => {
-      const accountId = document.getElementById("accountId").value;
-      if (accountId) {
-        document.getElementById("loading").classList.remove("hidden-screen");
-        document.getElementById("accountForm").classList.add("hidden");
-        setTimeout(() => {
-          document.getElementById("loading").classList.add("hidden-screen");
-          document.getElementById("signalButton").classList.remove("hidden");
-        }, 3000); // 3 seconds to simulate connection
-      } else {
-        alert("Please enter a valid account ID.");
+      const userId = document.getElementById("userId").value;
+      if (userId) {
+        document.getElementById("accountIdDisplay").innerText = userId;
+        document.getElementById("connectionSuccess").classList.remove("hidden");
+        document.getElementById("errorBox").classList.add("hidden");
       }
     });
 
-    // Show error message on signal button click
+    // Show error on button click for deposit
     document.getElementById("getSignalButton").addEventListener("click", () => {
       document.getElementById("errorBox").classList.remove("hidden");
     });
