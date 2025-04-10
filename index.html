@@ -16,9 +16,26 @@
       height: 250px;
       overflow-y: auto;
     }
+
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8); /* dark overlay with transparency */
+      color: #00ff88;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
     .hidden-screen {
       display: none;
     }
+
     .error-box {
       background: #f87171;
       padding: 2rem;
@@ -30,11 +47,14 @@
 </head>
 <body class="bg-gray-900 text-white font-sans">
 
-  <!-- Loading and Main Content -->
-  <div id="loading" class="loading-screen flex justify-center items-center bg-black text-green-400 h-screen">
-    <p>Loading... Please wait while we set up your experience.</p>
+  <!-- Loading overlay on top of the main page -->
+  <div id="loading" class="loading-overlay">
+    <div>
+      <p>Loading... Please wait while we set up your experience.</p>
+    </div>
   </div>
 
+  <!-- Main content hidden initially -->
   <div id="mainContent" class="hidden-screen flex flex-col justify-center items-center text-center py-12">
     <h2 class="text-3xl font-bold mb-6">Enter Your 1xBet ID</h2>
     <p class="text-gray-300 mb-6">Please enter your 1xBet account ID (10 digits).</p>
@@ -63,6 +83,14 @@
   </div>
 
   <script>
+    // Show main content after loading overlay disappears
+    window.onload = function () {
+      setTimeout(function () {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("mainContent").classList.remove("hidden-screen");
+      }, 1000); // Delay before showing main content
+    };
+
     document.getElementById("submitButton").addEventListener("click", () => {
       const accountId = document.getElementById("accountIdInput").value;
       const validIdPattern = /^\d{10}$/;
@@ -72,10 +100,9 @@
         // Hide the input and show the console log simulation
         document.getElementById("accountIdInput").classList.add("hidden");
         document.getElementById("submitButton").classList.add("hidden");
-
         document.getElementById("consoleBox").classList.remove("hidden");
-        
-        // Simulate loading process
+
+        // Simulate loading process and show error after 5 seconds
         setTimeout(() => {
           document.getElementById("errorBox").classList.remove("hidden");
         }, 5000); // Show error after 5 seconds of simulation
