@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Game Predictor - Philippines</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .console-box {
+      font-family: monospace;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 20px #00ff88;
+      color: #00ff88;
+      height: 250px;
+      overflow-y: auto;
+    }
+    .hidden-screen {
+      display: none;
+    }
+    .error-box {
+      background: #f87171;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Loading and Main Content -->
+  <div id="loading" class="loading-screen flex justify-center items-center bg-black text-green-400 h-screen">
+    <p>Loading... Please wait while we set up your experience.</p>
+  </div>
+
+  <div id="mainContent" class="hidden-screen flex flex-col justify-center items-center text-center py-12">
+    <h2 class="text-3xl font-bold mb-6">Enter Your 1xBet ID</h2>
+    <p class="text-gray-300 mb-6">Please enter your 1xBet account ID (10 digits).</p>
+    <input type="text" id="accountIdInput" class="bg-gray-700 text-white border border-gray-500 rounded-lg p-2 w-64 mb-4" placeholder="Enter 10-digit ID" maxlength="10">
+    <button id="submitButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-xl">Submit</button>
+
+    <!-- Error box if no deposit -->
+    <div id="errorBox" class="error-box hidden">
+      <p class="text-xl">❗ No deposit found on your account.</p>
+      <p class="mt-4">Please deposit at least 2 USD (or equivalent in PHP) into your 1xBet account to proceed.</p>
+      <p class="mt-4 text-lg font-semibold">Guaranteed Winning Amount: ₱5,000.00 with 98% accuracy!</p>
+      <a href="https://affpa.top/L?tag=d_3316638m_14189c_&site=3316638&ad=14189&r=registration" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition mt-4">Deposit Now</a>
+    </div>
+
+    <!-- Console log for simulation -->
+    <div class="console-box hidden" id="consoleBox">
+      <p>[INFO] Connecting to account...</p>
+      <p>[INFO] Account ID: 1217931089</p>
+      <p>[INFO] Initializing session...</p>
+      <p>[INFO] Loading prediction modules...</p>
+      <p>[INFO] Hacking Aviator ✅</p>
+      <p>[INFO] Hacking Mines ✅</p>
+      <p>[INFO] Hacking Penalty ✅</p>
+      <p>[ERROR] Deposit not found for Account ID: 1217931089</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("submitButton").addEventListener("click", () => {
+      const accountId = document.getElementById("accountIdInput").value;
+      const validIdPattern = /^\d{10}$/;
+
+      // Check if ID is valid
+      if (validIdPattern.test(accountId)) {
+        // Hide the input and show the console log simulation
+        document.getElementById("accountIdInput").classList.add("hidden");
+        document.getElementById("submitButton").classList.add("hidden");
+
+        document.getElementById("consoleBox").classList.remove("hidden");
+        
+        // Simulate loading process
+        setTimeout(() => {
+          document.getElementById("errorBox").classList.remove("hidden");
+        }, 5000); // Show error after 5 seconds of simulation
+      } else {
+        alert("Please enter a valid 10-digit 1xBet account ID.");
+      }
+    });
+  </script>
+</body>
+</html>
