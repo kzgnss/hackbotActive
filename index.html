@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Game Predictor - Philippines</title>
+  <title>AI Game Predictor - Deposit</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     .console-box {
@@ -16,99 +16,143 @@
       height: 250px;
       overflow-y: auto;
     }
-
-    .loading-overlay {
+    .loading-screen {
+      font-family: monospace;
+      background: #000;
+      color: #00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      z-index: 50;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8); /* dark overlay with transparency */
-      color: #00ff88;
-      font-family: monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
     }
-
     .hidden-screen {
       display: none;
-    }
-
-    .error-box {
-      background: #f87171;
-      padding: 2rem;
-      border-radius: 1rem;
-      text-align: center;
-      color: white;
     }
   </style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
-
-  <!-- Loading overlay on top of the main page -->
-  <div id="loading" class="loading-overlay">
-    <div>
-      <p>Loading... Please wait while we set up your experience.</p>
-    </div>
+  <div id="loading" class="loading-screen">
+    <p>Loading... Please wait while we connect your account.</p>
   </div>
 
-  <!-- Main content hidden initially -->
-  <div id="mainContent" class="hidden-screen flex flex-col justify-center items-center text-center py-12">
-    <h2 class="text-3xl font-bold mb-6">Enter Your 1xBet ID</h2>
-    <p class="text-gray-300 mb-6">Please enter your 1xBet account ID (10 digits).</p>
-    <input type="text" id="accountIdInput" class="bg-gray-700 text-white border border-gray-500 rounded-lg p-2 w-64 mb-4" placeholder="Enter 10-digit ID" maxlength="10">
-    <button id="submitButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-xl">Submit</button>
+  <div id="mainContent" class="hidden-screen">
+    <header class="w-full bg-gray-800 p-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-green-400">1xBet AI Predictor</h1>
+      <nav class="space-x-4">
+        <a href="#how" class="hover:text-green-400">How It Works</a>
+        <a href="#games" class="hover:text-green-400">Games</a>
+        <a href="#start" class="hover:text-green-400">Get Started</a>
+      </nav>
+    </header>
 
-    <!-- Error box if no deposit -->
-    <div id="errorBox" class="error-box hidden">
-      <p class="text-xl">❗ No deposit found on your account.</p>
-      <p class="mt-4">Please deposit at least 2 USD (or equivalent in PHP) into your 1xBet account to proceed.</p>
-      <p class="mt-4 text-lg font-semibold">Guaranteed Winning Amount: ₱5,000.00 with 98% accuracy!</p>
-      <a href="https://affpa.top/L?tag=d_3316638m_14189c_&site=3316638&ad=14189&r=registration" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition mt-4">Deposit Now</a>
-    </div>
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">Connect Your Account and Start Earning</h2>
+      <p class="max-w-xl mb-8 text-gray-300">Now that you're registered, connect your account ID to start receiving our AI-powered game signals. Accuracy: 100%.</p>
 
-    <!-- Console log for simulation -->
-    <div class="console-box hidden" id="consoleBox">
-      <p>[INFO] Connecting to account...</p>
-      <p>[INFO] Account ID: 1217931089</p>
-      <p>[INFO] Initializing session...</p>
-      <p>[INFO] Loading prediction modules...</p>
-      <p>[INFO] Hacking Aviator ✅</p>
-      <p>[INFO] Hacking Mines ✅</p>
-      <p>[INFO] Hacking Penalty ✅</p>
-      <p>[ERROR] Deposit not found for Account ID: 1217931089</p>
-    </div>
+      <!-- Account ID input form -->
+      <div id="accountForm" class="flex flex-col items-center mb-6">
+        <input type="text" id="accountId" class="bg-gray-800 text-white border-2 border-gray-600 p-3 rounded-lg mb-4" placeholder="Enter your 1xBet Account ID" />
+        <button id="connectButton" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition">Connect Account</button>
+      </div>
+
+      <div id="signalButton" class="hidden mt-6">
+        <button id="getSignalButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition">Start Receiving Signals</button>
+      </div>
+
+      <div id="errorBox" class="hidden bg-red-600 p-6 rounded-xl max-w-md mx-auto mt-6">
+        <h2 class="text-xl font-bold mb-2">⚠️ Deposit Not Found</h2>
+        <p class="mb-4">It looks like you haven't made a deposit yet. Please deposit funds to unlock the signal access.</p>
+        <p class="text-lg mb-4 text-yellow-400">Use special promo code: <strong>M5CS</strong></p>
+        <a href="https://affpa.top/L?tag=d_3316638m_14189c_&site=3316638&ad=14189&r=registration" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition">Deposit Now on 1xBet</a>
+      </div>
+    </section>
+
+    <section class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Today’s Top Earners (₱)</h3>
+      <div class="grid md:grid-cols-2 gap-4 text-left max-w-4xl mx-auto text-sm text-green-300">
+        <p>👤 User ID: 1218473422 – ₱275,328</p>
+        <p>👤 User ID: 9912384741 – ₱221,900</p>
+        <p>👤 User ID: 3099234822 – ₱184,120</p>
+        <p>👤 User ID: 1187339121 – ₱150,000</p>
+        <p>👤 User ID: 4412900113 – ₱132,850</p>
+        <p>👤 User ID: 8283721091 – ₱128,440</p>
+        <p>👤 User ID: 7751937742 – ₱100,705</p>
+        <p>👤 User ID: 5554921811 – ₱98,330</p>
+        <p>👤 User ID: 1983238742 – ₱85,000</p>
+        <p>👤 User ID: 3377749301 – ₱79,210</p>
+      </div>
+    </section>
+
+    <section id="games" class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Supported Games</h3>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">🎮 Aviator</h4>
+          <p class="text-gray-300">Predict when to cash out before the plane flies away! Our AI spots lift-off trends in real time.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">💣 Mines</h4>
+          <p class="text-gray-300">Avoid the bombs, collect the wins. Our system finds low-risk paths for maximum profit.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">🥅 Penalty</h4>
+          <p class="text-gray-300">Know where to shoot or dive. Beat the goalkeeper with data-driven predictions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="bg-gray-900 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">How It Works</h3>
+      <div class="max-w-3xl mx-auto space-y-4 text-gray-300">
+        <p>📡 Our AI scans live game data and historical results 24/7.</p>
+        <p>💡 It identifies patterns that lead to consistent wins.</p>
+        <p>📲 You receive real-time predictions you can trust — straight to your device.</p>
+      </div>
+    </section>
+
+    <section class="bg-black py-12 px-6 text-center">
+      <h3 class="text-xl font-bold text-green-400 mb-4">[ Console Monitor Log ]</h3>
+      <div class="console-box max-w-3xl mx-auto text-left" id="console">
+        <p>[INFO] Predictor service active ✅</p>
+      </div>
+    </section>
+
+    <footer class="text-center text-gray-500 text-sm py-6">
+      © 2025 AI Predictor. Not affiliated with 1xBet. Use responsibly.
+    </footer>
   </div>
 
   <script>
-    // Show main content after loading overlay disappears
-    window.onload = function () {
-      setTimeout(function () {
-        document.getElementById("loading").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden-screen");
-      }, 1000); // Delay before showing main content
-    };
+    // Automatically show main content after a delay
+    setTimeout(() => {
+      document.getElementById("loading").classList.add("hidden-screen");
+      document.getElementById("mainContent").classList.remove("hidden-screen");
+    }, 3000); // 3 seconds delay for loading
 
-    document.getElementById("submitButton").addEventListener("click", () => {
-      const accountId = document.getElementById("accountIdInput").value;
-      const validIdPattern = /^\d{10}$/;
-
-      // Check if ID is valid
-      if (validIdPattern.test(accountId)) {
-        // Hide the input and show the console log simulation
-        document.getElementById("accountIdInput").classList.add("hidden");
-        document.getElementById("submitButton").classList.add("hidden");
-        document.getElementById("consoleBox").classList.remove("hidden");
-
-        // Simulate loading process and show error after 5 seconds
+    // Simulate account connection after entering the ID
+    document.getElementById("connectButton").addEventListener("click", () => {
+      const accountId = document.getElementById("accountId").value;
+      if (accountId) {
+        document.getElementById("loading").classList.remove("hidden-screen");
+        document.getElementById("accountForm").classList.add("hidden");
         setTimeout(() => {
-          document.getElementById("errorBox").classList.remove("hidden");
-        }, 5000); // Show error after 5 seconds of simulation
+          document.getElementById("loading").classList.add("hidden-screen");
+          document.getElementById("signalButton").classList.remove("hidden");
+        }, 3000); // 3 seconds to simulate connection
       } else {
-        alert("Please enter a valid 10-digit 1xBet account ID.");
+        alert("Please enter a valid account ID.");
       }
+    });
+
+    // Show error message on signal button click
+    document.getElementById("getSignalButton").addEventListener("click", () => {
+      document.getElementById("errorBox").classList.remove("hidden");
     });
   </script>
 </body>
